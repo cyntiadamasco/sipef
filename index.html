@@ -405,12 +405,12 @@ body.view-mode #btn-export{opacity:1!important;pointer-events:auto!important}
   .hdr{height:auto;padding:9px 12px;gap:8px;flex-wrap:nowrap}
   .hdr-hamburger{display:flex}
   .logo-box{display:none}
-  .hdr-txt h1 span{display:none}
-  .hdr-txt h1{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .hdr-txt p{display:none}
+  .hdr-txt{display:none}
+  .hdr img{height:32px!important;flex-shrink:0}
+  .btn-nm{display:none!important}
+  #btn-key{display:none!important}
   .month-wrap{gap:5px}
-  #month-sel{font-size:12px;padding:5px 7px;max-width:130px}
-  .btn-nm{padding:5px 8px;font-size:11px}
+  #month-sel{font-size:12px;padding:5px 7px;max-width:108px}
   .btn-action{padding:5px 8px;font-size:14px;line-height:1}
   .btn-txt{display:none}
 
@@ -428,7 +428,8 @@ body.view-mode #btn-export{opacity:1!important;pointer-events:auto!important}
   .dash-kpi{flex:0 0 calc(50% - 4px);min-width:0}
   .dash-gauge-wrap{padding:18px 16px 14px}
   .dash-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
-  .dash-row-2col{flex-direction:column;gap:12px}
+  .dash-row-2col{flex-direction:column;gap:12px;align-items:stretch}
+  .dash-row-2col>*{min-width:0!important;width:100%}
 
   /* Insights 3-col → 1-col */
   .ins-body{grid-template-columns:1fr}
