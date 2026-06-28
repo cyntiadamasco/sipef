@@ -1,0 +1,8 @@
+# Arquivos locais — não enviar ao GitHub
+*.xlsx
+*.xls
+*.json
+etapas_js.txt
+logo-prima-qualita.png
+CUsersCyntiaAppDataLocalTempsipef_etapas.json
+.claude/

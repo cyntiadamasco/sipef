@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIPEF — Guia de Referência | Prima Qualitá Saúde</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#1B3A5C;
+  --azul:#0073BA;
+  --teal:#00A87B;
+  --teal-light:#E6FAF4;
+  --slate:#5B7FA6;
+  --border:#DDE8F0;
+  --bg:#F4F7FB;
+  --white:#FFFFFF;
+  --text:#1A2B3C;
+  --gray:#8A9AB0;
+  --alta-bg:#FEE2E2;--alta:#B91C1C;
+  --media-bg:#FEF3C7;--media:#C0640A;
+}
+html{scroll-behavior:smooth}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5;min-height:100vh}
+
+/* ── HEADER ── */
+.hdr{background:var(--navy);color:#fff}
+.hdr-top{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;padding:20px 28px 14px;border-bottom:1px solid rgba(255,255,255,.1)}
+.hdr-brand{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:5px}
+.hdr-title{font-size:20px;font-weight:800;letter-spacing:-.4px;line-height:1.2}
+.hdr-sub{font-size:11.5px;color:rgba(255,255,255,.55);margin-top:4px}
+.hdr-ref{font-family:'Courier New',monospace;font-size:11px;color:rgba(255,255,255,.4);text-align:right;white-space:nowrap;padding-top:4px;line-height:1.8}
+.hdr-ref strong{color:rgba(255,255,255,.7)}
+
+/* ── KPI BAR ── */
+.kpi-bar{display:flex;gap:0;padding:14px 28px;flex-wrap:wrap}
+.kpi{display:flex;align-items:baseline;gap:7px;padding-right:24px;margin-right:24px;border-right:1px solid rgba(255,255,255,.12)}
+.kpi:last-child{border-right:none;margin-right:0;padding-right:0}
+.kpi-n{font-family:'Courier New',monospace;font-size:26px;font-weight:800;color:var(--teal);letter-spacing:-1px;line-height:1}
+.kpi-l{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.45);padding-bottom:2px}
+
+/* ── TABS ── */
+.tab-bar{background:#fff;border-bottom:1px solid var(--border);display:flex;padding:0 28px;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,.06);overflow-x:auto}
+.tab-btn{padding:13px 18px;border:none;background:none;cursor:pointer;font-size:13px;font-weight:600;color:var(--gray);border-bottom:3px solid transparent;transition:color .15s,border-color .15s;white-space:nowrap;font-family:inherit}
+.tab-btn:hover{color:var(--navy)}
+.tab-btn.active{color:var(--navy);border-bottom-color:var(--teal)}
+
+/* ── CONTENT ── */
+.content{max-width:960px;margin:0 auto;padding:28px 24px 56px}
+.tab-panel{display:none}.tab-panel.active{display:block}
+
+/* ── CARDS ── */
+.card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:22px 24px;margin-bottom:16px}
+.card-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--slate);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+
+/* ── TAB 1: GERAL ── */
+.doc-banner{background:linear-gradient(135deg,#EAF4FF 0%,#E6FAF4 100%);border:1px solid #C4DDF5;border-radius:12px;padding:20px 24px;margin-bottom:16px;display:flex;gap:16px;align-items:flex-start}
+.doc-banner-icon{font-size:28px;flex-shrink:0;margin-top:2px}
+.doc-banner-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--azul);margin-bottom:5px}
+.doc-banner-text{font-size:13px;color:var(--navy);line-height:1.55}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.info-row{display:flex;flex-direction:column;gap:3px;padding:10px 12px;background:var(--bg);border-radius:8px}
+.info-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--gray)}
+.info-val{font-size:13px;color:var(--text);font-weight:500}
+.struct-list{list-style:none;display:flex;flex-direction:column;gap:9px}
+.struct-row{display:flex;align-items:flex-start;gap:10px}
+.struct-badge{background:var(--navy);color:#fff;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:4px 8px;border-radius:5px;white-space:nowrap;flex-shrink:0;margin-top:1px}
+.struct-txt{font-size:12.5px;color:#4A5568;line-height:1.45}
+.fonte-row{display:flex;gap:16px;flex-wrap:wrap}
+.fonte-block{flex:1;min-width:210px;background:var(--bg);border-radius:8px;padding:12px 14px}
+.fonte-code{font-family:'Courier New',monospace;font-size:13px;font-weight:700;color:var(--azul);background:#EAF4FF;display:inline-block;padding:4px 10px;border-radius:6px;border:1px solid #B8D9F5;margin-bottom:6px}
+.fonte-note{font-size:12px;color:var(--gray);line-height:1.45}
+
+/* ── TAB 2: INSTRUÇÕES ── */
+.instr-list{display:flex;flex-direction:column;gap:10px}
+.instr-item{display:flex;gap:16px;align-items:flex-start;padding:16px 20px;background:#fff;border:1px solid var(--border);border-radius:10px;border-left:3px solid var(--azul)}
+.instr-n{font-family:'Courier New',monospace;font-size:24px;font-weight:800;color:var(--border);min-width:34px;line-height:1;padding-top:1px;flex-shrink:0}
+.instr-titulo{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.instr-desc{font-size:12.5px;color:#4A5568;line-height:1.5}
+
+/* ── TAB 3: MATRIZES ── */
+.search-wrap{position:relative;margin-bottom:14px}
+.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--gray);pointer-events:none}
+.mat-search{width:100%;padding:10px 12px 10px 36px;border:1px solid var(--border);border-radius:8px;font-size:13px;color:var(--text);background:#fff;outline:none;font-family:inherit;transition:border-color .15s}
+.mat-search:focus{border-color:var(--azul)}
+.mat-table{width:100%;border-collapse:collapse}
+.mat-table th{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--gray);padding:10px 16px;text-align:left;border-bottom:2px solid var(--border);background:#fff}
+.mat-row td{padding:10px 16px;border-bottom:1px solid var(--border);vertical-align:middle;transition:background .1s}
+.mat-row:last-child td{border-bottom:none}
+.mat-row:hover td{background:var(--bg)}
+.mat-code{font-family:'Courier New',monospace;font-size:13px;font-weight:800;color:var(--azul);background:#EAF4FF;padding:4px 9px;border-radius:5px;border-left:3px solid var(--azul);display:inline-block}
+.mat-desc{font-size:13px;color:var(--text)}
+.mat-row.hidden{display:none}
+.no-results{padding:24px;text-align:center;color:var(--gray);font-size:13px;display:none}
+
+/* ── TAB 4: ETAPAS ── */
+.etapa-filter{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.et-jump{padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;width:90px;font-family:'Courier New',monospace;font-weight:700;outline:none;background:#fff;color:var(--navy)}
+.et-jump:focus{border-color:var(--azul)}
+.et-jump-label{font-size:12px;color:var(--gray)}
+.expand-all-btn{margin-left:auto;font-size:12px;color:var(--azul);background:none;border:none;cursor:pointer;font-family:inherit;font-weight:600;text-decoration:underline;text-underline-offset:2px}
+
+.etapa-card{background:#fff;border:1px solid var(--border);border-radius:10px;margin-bottom:7px;overflow:hidden;transition:box-shadow .15s}
+.etapa-card:hover{box-shadow:0 2px 14px rgba(0,0,0,.07)}
+.etapa-hdr{display:flex;align-items:stretch;cursor:pointer;user-select:none}
+.etapa-num{width:68px;background:var(--bg);border-right:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Courier New',monospace;font-size:22px;font-weight:800;color:var(--navy);flex-shrink:0;transition:background .15s,color .15s;min-height:62px}
+.etapa-card.open .etapa-num{background:var(--teal-light);color:var(--teal)}
+.etapa-hdr-body{flex:1;padding:13px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:0}
+.etapa-nome{font-size:13.5px;font-weight:700;color:var(--navy);line-height:1.3}
+.etapa-mtz{font-size:10px;font-family:'Courier New',monospace;color:var(--slate);margin-top:4px}
+.etapa-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.prio{font-size:10px;font-weight:700;padding:3px 8px;border-radius:5px}
+.prio-Alta{background:var(--alta-bg);color:var(--alta)}
+.prio-Média{background:var(--media-bg);color:var(--media)}
+.chevron{color:var(--gray);transition:transform .2s;flex-shrink:0}
+.etapa-card.open .chevron{transform:rotate(180deg)}
+
+.etapa-body{display:none;border-top:1px solid var(--border);padding:14px 16px 16px 84px}
+.etapa-card.open .etapa-body{display:block}
+.subs-list{list-style:none;display:flex;flex-direction:column;gap:6px;margin-top:4px}
+.sub-item{display:flex;align-items:flex-start;gap:8px;font-size:12.5px;color:#4A5568;line-height:1.4}
+.sub-item::before{content:'›';color:var(--teal);font-weight:800;flex-shrink:0;margin-top:-1px}
+.no-subs{font-size:12px;color:var(--gray);font-style:italic;margin-top:4px}
+.modulo-tag{display:inline-block;font-size:10px;font-weight:600;color:var(--slate);background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:2px 7px;margin-bottom:10px;font-family:'Courier New',monospace}
+
+/* ── FOOTER ── */
+.app-footer{padding:14px 28px;background:#fff;border-top:1px solid var(--border);color:var(--gray);font-size:11.5px;text-align:center}
+.app-footer b{color:var(--navy)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:640px){
+  .hdr-top{flex-direction:column;gap:8px}.hdr-ref{text-align:left}
+  .kpi-bar{gap:12px}.kpi{border-right:none;margin-right:0;padding-right:0}
+  .info-grid{grid-template-columns:1fr}
+  .tab-btn{padding:11px 12px;font-size:12px}
+  .content{padding:16px 14px 40px}
+  .etapa-body{padding-left:14px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="hdr-top">
+    <div>
+      <div class="hdr-brand">Prima Qualitá Saúde · CIGAC</div>
+      <div class="hdr-title">SIPEF — Guia de Referência</div>
+      <div class="hdr-sub">Sistema de Prestação de Contas e Monitoramento Econômico-Financeiro · Compliance</div>
+    </div>
+    <div class="hdr-ref">
+      <strong>MTU-SIPEF-01 v. 2025.09.23</strong><br>
+      Emissão: 15/05/2026<br>
+      Documento interno
+    </div>
+  </div>
+  <div class="kpi-bar">
+    <div class="kpi"><span class="kpi-n">308</span><span class="kpi-l">Ações totais</span></div>
+    <div class="kpi"><span class="kpi-n">24</span><span class="kpi-l">Etapas</span></div>
+    <div class="kpi"><span class="kpi-n">145</span><span class="kpi-l">Subetapas</span></div>
+    <div class="kpi"><span class="kpi-n">139</span><span class="kpi-l">Sub-subetapas</span></div>
+    <div class="kpi"><span class="kpi-n">33</span><span class="kpi-l">Matrizes SIPEF</span></div>
+  </div>
+</header>
+
+<nav class="tab-bar" id="tab-bar">
+  <button class="tab-btn active" onclick="showTab('geral',this)">Informações Gerais</button>
+  <button class="tab-btn" onclick="showTab('instrucoes',this)">Instruções de Uso</button>
+  <button class="tab-btn" onclick="showTab('matrizes',this)">Relação de Matrizes</button>
+  <button class="tab-btn" onclick="showTab('etapas',this)">Estrutura das Etapas</button>
+</nav>
+
+<main class="content">
+
+  <!-- ══ TAB 1: INFORMAÇÕES GERAIS ══ -->
+  <div id="tab-geral" class="tab-panel active">
+
+    <div class="doc-banner">
+      <div class="doc-banner-icon">📋</div>
+      <div>
+        <div class="doc-banner-label">Documento de Planejamento e Acompanhamento</div>
+        <div class="doc-banner-text">Cronograma Geral de Implantação do Sistema SIPEF (BRGAAP) — registro integral das 308 ações distribuídas em 24 etapas sequenciais, desde o cadastro inicial do Contrato de Gestão até o encerramento mensal e transmissão ao órgão fiscalizador.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Identificação do Documento</div>
+      <div class="info-grid">
+        <div class="info-row"><span class="info-lbl">Entidade</span><span class="info-val">Prima Qualitá Saúde</span></div>
+        <div class="info-row"><span class="info-lbl">Setor Responsável</span><span class="info-val">Compliance</span></div>
+        <div class="info-row"><span class="info-lbl">Sistema</span><span class="info-val">SIPEF — BRGAAP Corporation</span></div>
+        <div class="info-row"><span class="info-lbl">Versão do Manual</span><span class="info-val">MTU-SIPEF-01 v. 2025.09.23</span></div>
+        <div class="info-row"><span class="info-lbl">Data de Emissão</span><span class="info-val">15/05/2026</span></div>
+        <div class="info-row"><span class="info-lbl">Confidencialidade</span><span class="info-val">Documento interno — uso restrito</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Estrutura da Planilha</div>
+      <ul class="struct-list">
+        <li class="struct-row"><span class="struct-badge">Dashboard</span><span class="struct-txt">Painel executivo com KPIs e gráficos atualizados automaticamente conforme o preenchimento. <strong>Não editar diretamente</strong> — alimentado pelas fórmulas do Cronograma.</span></li>
+        <li class="struct-row"><span class="struct-badge">Cronograma</span><span class="struct-txt">WBS completa (24 etapas → 145 subetapas → 139 sub-subetapas). O usuário preenche Responsável, Datas Previstas, Data de Conclusão Real e Status.</span></li>
+        <li class="struct-row"><span class="struct-badge">Resumo por Etapa</span><span class="struct-txt">Consolidação automática do % de conclusão por etapa principal (1 a 24). Atualiza ao alterar Status no Cronograma.</span></li>
+        <li class="struct-row"><span class="struct-badge">Matrizes SIPEF</span><span class="struct-txt">Catálogo das 33 matrizes de importação do sistema SIPEF (0001 a 2200 + Centro de Custos).</span></li>
+        <li class="struct-row"><span class="struct-badge">Instruções</span><span class="struct-txt">Orientações detalhadas de uso da planilha, regras de preenchimento e referências normativas.</span></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Fonte Normativa e Base Legal</div>
+      <div class="fonte-row">
+        <div class="fonte-block">
+          <div class="info-lbl" style="margin-bottom:8px">Manual de referência</div>
+          <div class="fonte-code">MTU-SIPEF-01 v. 2025.09.23</div>
+          <div class="fonte-note">Mapeamento integral das seções 3 (Login) a 8 (Relatórios) e capítulos 5 (Transmissões) e 6 (Restrições). Manter o manual atualizado como referência paralela ao preenchimento.</div>
+        </div>
+        <div class="fonte-block">
+          <div class="info-lbl" style="margin-bottom:8px">Base legal</div>
+          <div class="fonte-code">LGPD — Lei nº 13.709/2018</div>
+          <div class="fonte-note">Documento interno. Anonimizar dados pessoais em compartilhamentos externos conforme política interna da Prima Qualitá Saúde. Não distribuir sem autorização do Compliance.</div>
+        </div>
+        <div class="fonte-block">
+          <div class="info-lbl" style="margin-bottom:8px">Atualização</div>
+          <div class="fonte-code">Periodicidade semanal</div>
+          <div class="fonte-note">A aba Dashboard reflete o estado do projeto em tempo real. A atualização semanal do Status garante visibilidade adequada para a gestão executiva e o órgão fiscalizador.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══ TAB 2: INSTRUÇÕES ══ -->
+  <div id="tab-instrucoes" class="tab-panel">
+    <div class="instr-list" id="instr-list"></div>
+  </div>
+
+  <!-- ══ TAB 3: MATRIZES ══ -->
+  <div id="tab-matrizes" class="tab-panel">
+    <div class="search-wrap">
+      <svg class="search-icon" width="15" height="15" viewBox="0 0 15 15" fill="none">
+        <circle cx="6.5" cy="6.5" r="5" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M10.5 10.5l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <input class="mat-search" id="mat-search" type="text" placeholder="Buscar por código ou descrição…" oninput="filterMat(this.value)" autocomplete="off">
+    </div>
+    <div class="card" style="padding:0;overflow:hidden">
+      <table class="mat-table">
+        <thead>
+          <tr>
+            <th style="width:130px">Código</th>
+            <th>Descrição</th>
+          </tr>
+        </thead>
+        <tbody id="mat-tbody"></tbody>
+      </table>
+      <div class="no-results" id="no-results">Nenhuma matriz encontrada para "<span id="no-q"></span>".</div>
+    </div>
+  </div>
+
+  <!-- ══ TAB 4: ETAPAS ══ -->
+  <div id="tab-etapas" class="tab-panel">
+    <div class="etapa-filter">
+      <input class="et-jump" id="et-jump" type="number" min="1" max="24" placeholder="Nº" title="Ir para etapa">
+      <span class="et-jump-label">Ir para etapa</span>
+      <button class="expand-all-btn" id="expand-all-btn" onclick="toggleAll()">Expandir todas</button>
+    </div>
+    <div id="etapas-list"></div>
+  </div>
+
+</main>
+
+<footer class="app-footer">
+  <b>CIGAC</b> — Centro Integrado de Gestão e Assistência Compartilhada &nbsp;·&nbsp; Prima Qualitá Saúde &nbsp;·&nbsp; 2026
+</footer>
+
+<script>
+// ── Tabs ──────────────────────────────────────────────────
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── Instruções ────────────────────────────────────────────
+const INSTRUCOES = [
+  {t:'Aba Cronograma', d:'Lista hierárquica completa com 308 ações. Linhas em azul-escuro = <strong>ETAPA</strong> (cabeçalho), azul-claro = <strong>SUBETAPA</strong>, branco/azul-bebê = <strong>SUB-SUBETAPA</strong>. A hierarquia WBS facilita a localização de qualquer ação.'},
+  {t:'Campos para preencher', d:'Apenas as colunas <strong>Responsável, Data Início Prevista, Data Fim Prevista, Data Conclusão Real, Status, Importado</strong> e <strong>Validado</strong> precisam ser preenchidas. Demais colunas são calculadas ou fixas — não alterar.'},
+  {t:'Status', d:'Use o drop-down: <strong>Não iniciado / Em andamento / Aguardando validação / Concluído / Pendente ajuste / N/A</strong>. A formatação condicional pinta automaticamente cada linha conforme o status selecionado.'},
+  {t:'Dashboard', d:'Atualiza automaticamente a partir do preenchimento na aba Cronograma. <strong>Não edite a aba Dashboard</strong> — ela é 100% calculada. Qualquer alteração manual pode quebrar as fórmulas.'},
+  {t:'Resumo por Etapa', d:'Consolidação automática do % de conclusão por etapa principal (1 a 24). Atualiza ao alterar Status no Cronograma. Indicado para acompanhamento executivo e reuniões de gestão.'},
+  {t:'Cores das prioridades', d:'<strong style="color:#B91C1C">Alta = vermelho</strong> &nbsp;·&nbsp; <strong style="color:#C0640A">Média = laranja</strong> &nbsp;·&nbsp; <strong style="color:#1A7A5E">Baixa = verde</strong>. As cores seguem a fonte do Manual SIPEF e da planilha original Prima Qualitá Saúde.'},
+  {t:'Matrizes SIPEF', d:'Catálogo de referência das 33 matrizes (0001 a 2200 + Centro de Custos). Cada etapa indica qual(is) matriz(es) deve(m) ser importadas. Consulte a aba <strong>Relação de Matrizes</strong> neste guia para referência rápida por código.'},
+  {t:'Fonte normativa', d:'Manual <strong>MTU-SIPEF-01 v. 2025.09.23</strong>, com mapeamento integral das seções 3 (Login) a 8 (Relatórios) e capítulos 5 (Transmissões) e 6 (Restrições). Manter o manual atualizado como referência paralela.'},
+  {t:'Confidencialidade', d:'Conforme política da Prima Qualitá Saúde e <strong>LGPD (Lei 13.709/18)</strong>, este documento é <strong>interno</strong>. Anonimizar dados pessoais antes de qualquer compartilhamento externo. Não distribuir sem autorização do setor Compliance.'},
+  {t:'Atualização', d:'Recomenda-se <strong>atualização semanal</strong> do Status. A aba Dashboard reflete o estado do projeto em tempo real. A periodicidade semanal garante visibilidade adequada para a gestão executiva e o órgão fiscalizador.'},
+];
+
+(function buildInstr(){
+  const el = document.getElementById('instr-list');
+  INSTRUCOES.forEach((item,i) => {
+    el.innerHTML += `<div class="instr-item">
+      <div class="instr-n">${String(i+1).padStart(2,'0')}</div>
+      <div>
+        <div class="instr-titulo">${item.t}</div>
+        <div class="instr-desc">${item.d}</div>
+      </div>
+    </div>`;
+  });
+})();
+
+// ── Matrizes ──────────────────────────────────────────────
+const MATRIZES = [
+  {c:'0001',d:'Prestação de Contas'},
+  {c:'0010',d:'Repasses'},
+  {c:'0011',d:'Empenhos'},
+  {c:'0100',d:'Contas Financeiras (Bancárias)'},
+  {c:'0110',d:'Extratos Bancários (manual)'},
+  {c:'0111',d:'Extratos Bancários — OFX'},
+  {c:'0200',d:'Movimentação Financeira / Lançamentos'},
+  {c:'0201',d:'Contas a Pagar'},
+  {c:'0300',d:'Balancete'},
+  {c:'0400',d:'Balanço Patrimonial (anual)'},
+  {c:'0500',d:'Folha de Pagamento'},
+  {c:'0510',d:'Servidores Públicos'},
+  {c:'0520',d:'Cargos de Servidores Públicos'},
+  {c:'0530',d:'Folha de Pagamento Especial'},
+  {c:'0600',d:'Bens Móveis'},
+  {c:'0700',d:'Encargos sobre Folha'},
+  {c:'0800',d:'Estoque'},
+  {c:'0900',d:'DRE'},
+  {c:'1200',d:'Contratos Fornecedores'},
+  {c:'1210',d:'Aditivos Contratuais'},
+  {c:'1230',d:'Contrato Fornecedor Global'},
+  {c:'1231',d:'Aditivo Contratual Global'},
+  {c:'1300',d:'Indicadores Hospitalares'},
+  {c:'1400',d:'Declarações'},
+  {c:'1500',d:'Gastos com Colaboradores'},
+  {c:'1600',d:'Diário'},
+  {c:'1700',d:'Razão'},
+  {c:'1800',d:'Demandas Judiciais'},
+  {c:'1900',d:'Benefícios da Folha'},
+  {c:'2000',d:'Departamentos'},
+  {c:'2100',d:'Cadastro de Fornecedores'},
+  {c:'2200',d:'Funcionários'},
+  {c:'CC',  d:'Centro de Custos (sem matriz numerada)'},
+];
+
+(function buildMat(){
+  const tb = document.getElementById('mat-tbody');
+  MATRIZES.forEach(m => {
+    tb.innerHTML += `<tr class="mat-row" data-s="${m.c.toLowerCase()} ${m.d.toLowerCase()}">
+      <td><span class="mat-code">${m.c}</span></td>
+      <td class="mat-desc">${m.d}</td>
+    </tr>`;
+  });
+})();
+
+function filterMat(val) {
+  const q = val.toLowerCase().trim();
+  let shown = 0;
+  document.querySelectorAll('.mat-row').forEach(r => {
+    const hide = q && !r.dataset.s.includes(q);
+    r.classList.toggle('hidden', hide);
+    if (!hide) shown++;
+  });
+  const nr = document.getElementById('no-results');
+  const nq = document.getElementById('no-q');
+  nq.textContent = val;
+  nr.style.display = (q && shown === 0) ? 'block' : 'none';
+}
+
+// ── Etapas ────────────────────────────────────────────────
+const ETAPAS = [
+  {num:1, nome:'Cadastro do Contrato de Gestão', mtz:'Manual', mod:'Módulos > Contrato Gestão', prio:'Alta',
+   subs:['Acessar tela Contrato Gestão e clicar em Inserir','Preencher Data Início Vigência','Preencher Data Final Vigência','Preencher Descrição do Contrato','Anexar Arquivo do Contrato (PDF)','Preencher CNPJ da unidade','Preencher Data de Rescisão (se aplicável)','Preencher Número Total de Parcelas','Preencher Valor Total do Contrato','Preencher Valor da Parcela','Marcar Aditivo (se for aditivo do CG)','Marcar Cota-Parte / Porcentagem / Valor Cota-Parte / Unidade','Confirmar cadastro (OK)']},
+  {num:2, nome:'Abertura de Prestação de Contas, Empenhos e Repasses', mtz:'0001 / 0010 / 0011', mod:'Módulos > Prestação de Contas', prio:'Alta',
+   subs:['Cadastrar Prestação de Contas (Matriz 0001)','Cadastrar Repasses (Matriz 0010)','Cadastrar Empenhos (Matriz 0011)']},
+  {num:3, nome:'Cadastros Auxiliares', mtz:'2000 / 2100 / 2200 / CC', mod:'Módulos > Cadastros Auxiliares', prio:'Alta',
+   subs:['Cadastro de Fornecedores (Matriz 2100)','Cadastro de Departamentos (Matriz 2000)','Cadastro de Colaboradores (Matriz 2200)','Cadastro de Centro de Custo — somente Administrador','Cadastro de Usuários — somente Administrador','Cadastro de Tipo de Despesa e Categoria de Despesa (SIPEF Audit)']},
+  {num:4, nome:'Anexos Auxiliares (Declarações e Anexos à PC)', mtz:'1400', mod:'Módulos > PC > Declarações / Anexos', prio:'Alta',
+   subs:['Declarações diversas (Matriz 1400)','Pequenas Despesas — registro manual']},
+  {num:5, nome:'Contas Financeiras (Contas Bancárias)', mtz:'0100', mod:'Módulos > Financeiro > Contas Bancárias', prio:'Alta',
+   subs:['Cadastrar cada conta bancária da unidade (Matriz 0100)','Conta Contábil vinculada','Descrição da conta bancária','Nº do Banco / Nome do Banco (selecionar)','Agência + Dígito / Conta + Dígito','Saldo Anterior (saldo do mês anterior)','Marcar Conta Aplicação (se exclusiva para aplicações)','Conferir saldos bancários iniciais com extratos']},
+  {num:6, nome:'Contratos de Fornecedores', mtz:'1200', mod:'Contratos > Contrato Fornecedor', prio:'Alta',
+   subs:['Extrair contratos do Cigan e consolidar na Matriz 1200','Preencher dados do contrato (linha a linha)','Data Início + Data Final de Vigência / Vigência em meses','Número do Contrato / Valor Total / Valor da Parcela / Parcela Variável','Centro de Custos (rateio)','Nome, CNPJ/CPF, Objeto e Descrição do Serviço do fornecedor','Anexar Arquivo do Contrato (PDF)','Anexar Pesquisa de Mercado / Coleta de Preços']},
+  {num:7, nome:'Aditivos Fornecedores', mtz:'1210', mod:'Contratos > Contrato Fornecedor > Aba Aditivos', prio:'Média',
+   subs:['Selecionar contrato pai e abrir aba Aditivos','Preencher Descrição padrão do aditivo','Data Início e Data Fim do aditivo','Valor do aditivo','Anexar arquivo PDF do aditivo']},
+  {num:8, nome:'Movimentação Financeira / Rateio Centro de Custos', mtz:'0200', mod:'Módulos > Financeiro > Lançamentos', prio:'Alta',
+   subs:['Exportar a Matriz 0200 do Cigam','Competência (formato mmmm/aa)','Data da Emissão','Centro de Custos (rateio por unidade)','Tipo Operação (1 a 52: Repasse / Pagto Fornecedores / Tributos / RPA / etc.)','Tipo Documento (1 a 19: Cheque / TED / DOC / Boleto / DARF / GPS / FGTS / PIX / etc.)','Quando Tipo Operação = 8: Classificação Pagamento + Tipo e Classificação Fornecedor','Aba Tipos de Despesas (rateio por rubrica regulada)','Anexar caminho do Atesto e do Comprovante Bancário']},
+  {num:9, nome:'Extratos Bancários', mtz:'0110 / 0111', mod:'Módulos > Financeiro > Extratos Bancários', prio:'Alta',
+   subs:['Cadastrar Extrato Manual (Matriz 0110)','Descrição + Conta Bancária + Data de emissão','Anexar Arquivo PDF do extrato','Cadastrar Extrato OFX (Matriz 0111)','Anexar Arquivo .OFX (saldos preenchidos automaticamente)','Validar Saldo Inicial / Total Débito / Total Crédito / Saldo Atual','Rotina diária — extrair do banco e subir extratos']},
+  {num:10, nome:'Módulo RH: Folha de Pagamento Especial', mtz:'0530 / 0500', mod:'Módulos > RH > Folha de Pagamento Especial', prio:'Alta',
+   subs:['Aba Geral: Mês de competência, Centro de Custos, Tipo Folha, Tipo Colaborador','Nome, CPF (vínculo com 2200), Cargo, Nível Escolar, Data Nascimento, Sexo, Atividade (Fim/Meio)','Data Admissão/Início e Data Rescissão/Término','Horas Máx/Mín Semanais + Horas Trabalhadas + Tipo Contrato','Se PJ: Razão Social, CNPJ Empresa, CRM/Conselho, Nº Nota Fiscal','Aba Vencimentos: Salário Base/Bruto/Líquido, Gratificação, Horas Extras, Adicional Noturno, DSR','Férias + 1/3 Adicional / 13º Salário / Verbas Rescisórias','Aba Benefícios: Vale Transporte, Vale Refeição, Vale Alimentação, Cesta Básica, Convênios','Aba Descontos: IRRF, INSS/RGPS, Plano de Saúde, Consignado, Contribuição Sindical','Aba Empresa: Bases PIS, FGTS, INSS e IRRF patronal / RAT / FAP']},
+  {num:11, nome:'Módulo RH: Encargos sobre Folha', mtz:'0700', mod:'Módulos > RH > Encargos', prio:'Alta', subs:[]},
+  {num:12, nome:'Módulo RH: Benefícios da Folha', mtz:'1900', mod:'Módulos > RH > Benefícios', prio:'Alta', subs:[]},
+  {num:13, nome:'Módulo Contábil: Balancete', mtz:'0300', mod:'Módulos > Contabilidade > Balancete', prio:'Alta', subs:[]},
+  {num:14, nome:'Módulo Contábil: DRE', mtz:'0900', mod:'Módulos > Contabilidade > DRE', prio:'Alta', subs:[]},
+  {num:15, nome:'Módulo Contábil: Balanço Patrimonial (anual)', mtz:'0400', mod:'Módulos > Contabilidade > Balanço', prio:'Alta', subs:[]},
+  {num:16, nome:'Módulo Contábil: Livro Diário', mtz:'1600', mod:'Módulos > Contabilidade > Livro Diário', prio:'Alta', subs:[]},
+  {num:17, nome:'Módulo Contábil: Livro Razão', mtz:'1700', mod:'Módulos > Contabilidade > Livro Razão', prio:'Alta', subs:[]},
+  {num:18, nome:'Módulo Contábil: Estoque', mtz:'0800', mod:'Módulos > Contabilidade > Estoque', prio:'Alta', subs:[]},
+  {num:19, nome:'Bens Móveis (Patrimônio)', mtz:'0600', mod:'Módulos > Patrimônio > Bens Móveis', prio:'Alta', subs:[]},
+  {num:20, nome:'Demandas Judiciais', mtz:'1800', mod:'Módulos > Demandas Judiciais', prio:'Alta', subs:[]},
+  {num:21, nome:'Rateio entre Contratos de Gestão', mtz:'1200 / 0100 / 0200 / 0700 / 1900 / 0300 / 1700', mod:'Múltiplos módulos — rateio inter-CG', prio:'Alta', subs:[]},
+  {num:22, nome:'Transmissões ao Órgão Fiscalizador', mtz:'—', mod:'Transmissão > Órgão Fiscalizador', prio:'Alta', subs:[]},
+  {num:23, nome:'Restrições e Correções', mtz:'—', mod:'Transmissão > Restrições', prio:'Alta', subs:[]},
+  {num:24, nome:'Relatórios, Exportações e Encerramento do Mês', mtz:'—', mod:'Relatórios > Exportações', prio:'Alta', subs:[]},
+];
+
+(function buildEtapas(){
+  const el = document.getElementById('etapas-list');
+  ETAPAS.forEach(et => {
+    const n2 = String(et.num).padStart(2,'0');
+    const subsHtml = et.subs.length
+      ? `<ul class="subs-list">${et.subs.map(s=>`<li class="sub-item">${s}</li>`).join('')}</ul>`
+      : `<p class="no-subs">Consulte a planilha Cronograma para o detalhamento das subetapas desta etapa.</p>`;
+    el.innerHTML += `
+      <div class="etapa-card" id="et${et.num}">
+        <div class="etapa-hdr" onclick="toggleEt(${et.num})">
+          <div class="etapa-num">${n2}</div>
+          <div class="etapa-hdr-body">
+            <div>
+              <div class="etapa-nome">${et.nome}</div>
+              <div class="etapa-mtz">Matrizes: ${et.mtz}</div>
+            </div>
+            <div class="etapa-right">
+              <span class="prio prio-${et.prio}">${et.prio}</span>
+              <svg class="chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="etapa-body">
+          <span class="modulo-tag">${et.mod}</span>
+          ${subsHtml}
+        </div>
+      </div>`;
+  });
+})();
+
+function toggleEt(num) {
+  document.getElementById('et' + num).classList.toggle('open');
+}
+
+// Jump to etapa
+document.getElementById('et-jump').addEventListener('keydown', function(e){
+  if (e.key !== 'Enter') return;
+  const n = parseInt(this.value);
+  if (n >= 1 && n <= 24) {
+    const card = document.getElementById('et' + n);
+    card.classList.add('open');
+    card.scrollIntoView({behavior:'smooth', block:'start'});
+    this.value = '';
+  }
+});
+
+// Expand / collapse all
+let allOpen = false;
+function toggleAll() {
+  allOpen = !allOpen;
+  document.querySelectorAll('.etapa-card').forEach(c => c.classList.toggle('open', allOpen));
+  document.getElementById('expand-all-btn').textContent = allOpen ? 'Recolher todas' : 'Expandir todas';
+}
+</script>
+</body>
+</html>
